@@ -10,13 +10,14 @@ const useFetch = ({ url }: PropsUseFetch) => {
   })
 
   const cancelTokenSource = axios.CancelToken.source()
-
   const fetchData = useCallback(async () => {
     try {
       const response = await axios.get(url, {
-        cancelToken: cancelTokenSource.token,
+        // cancelToken: cancelTokenSource.token,
       })
       const data = await response.data
+      console.log(data)
+      // const data = await response.data
 
       if (data) {
         setFetchedData({
@@ -31,6 +32,7 @@ const useFetch = ({ url }: PropsUseFetch) => {
       } else {
         console.log('Error ocurred ', error)
       }
+      console.log(error)
       setFetchedData({
         data: [],
         isLoading: false,
@@ -40,6 +42,7 @@ const useFetch = ({ url }: PropsUseFetch) => {
   }, [url])
 
   useEffect(() => {
+    console.log('entro al useEfect')
     fetchData()
     return () => cancelTokenSource.cancel()
   }, [url, fetchData])

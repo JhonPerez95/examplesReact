@@ -8,10 +8,12 @@ const ExampleFetch = () => {
   const debouncedVal = useDebounce({ val: text, delay: 500 })
 
   console.log(debouncedVal)
+  const url2 = 'https://swapi.dev/api/planets'
   const url = `https://swapi.dev/api/people?search=${debouncedVal}`
 
-  const { data, isLoading, error } = useFetch({ url })
+  const { data, isLoading, error } = useFetch({ url: url2 })
 
+  console.log({data});
   if (isLoading) {
     return <div>Loading...</div>
   }
